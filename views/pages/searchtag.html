@@ -1,0 +1,12 @@
+<h5>Categories:</h5>
+        <ol>
+            <?php
+            foreach ($data['tags'] as $item) {?>
+            <li>
+                <a href="/pages/<?=$item['categories']?>"><?=$item['categories']?></a>
+            </li>
+                <?php
+            }?>
+        </ol>
+
+

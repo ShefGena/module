@@ -1,0 +1,66 @@
+<?php
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$p = new Pagination(array(
+    'itemsCount' => $data['count'][0]['cnt'],
+    'itemsPerPage' => 5,
+    'currentPage' => $page
+));
+?>
+<div class="panel-group col-sm-offset-2 col-sm-8 main_part">
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <h3>Science</h3>
+        <div class="panel-body">
+            <div class="panel-body">
+                <?php if(!$data['params']>0){?>
+                    <table class="table">
+                        <?php foreach ($data['news'] as $item){?>
+                            <tr>
+                                <td><img class="img-rounded img_size" width="50" height="50"  src="<?=$item['img_link']?>">
+                                </td>
+                                <td><b><a href="/pages/science/<?=$item['id']?>"><?=$item['title']?></b></a></td>
+                            </tr>
+
+                        <?php }?>
+                    </table>
+                <?php } else {
+                    ?>
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2><?=$data['some_news'][0]['title']?></h2>
+                        <p class="lead"><?=$data['some_news'][0]['content']?></p>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="featurette-image img-responsive center-block" src="<?=$data['some_news'][0]['img_link']?>">
+                    </div>
+                </div>
+                    <div class="col-sm-12 text-muted">Сейчас читают: <?=rand(1, 6)?></div>
+                    <div class="col-sm-12">TAG:<a href="/pages/science/">Science</a></div>
+                <?php }
+                ?>
+            </div>
+        </div>
+
+
+
+    <div class="panel-heading text-center"><?php
+    if(!$data['params']>0){
+        //echo "<pre>";
+    $i=0;
+
+    //print_r($p);
+    foreach ($p->buttons as $button) :
+    if ($button->isActive) : ?>
+
+        <a href = '?page=<?=$button->page?>'><?=$button->text?></a>
+            <?php else : ?>
+            <span style="color:#555555"><?=$button->text?></span>
+            <?php endif;
+            if (++$i==6) break;
+            endforeach;} ?>
+    </div>
